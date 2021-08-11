@@ -1,10 +1,13 @@
 import classes from './ProfileForm.module.css';
 import { useContext, useRef } from 'react';
 import AuthContext from '../../store/auth-context';
+import { useHistory } from 'react-router';
 
 const ProfileForm = () => {
   const authCtx = useContext(AuthContext);
   const newPasswordInputRef = useRef();
+
+  const history = useHistory();
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -25,6 +28,7 @@ const ProfileForm = () => {
         },
       }
     ).then((res) => {
+      history.replace('/');
       //assumption: Always succeeds!!!
       console.log(res);
     });
@@ -36,7 +40,7 @@ const ProfileForm = () => {
         <input
           type='password'
           id='new-password'
-          minLength='7'
+          minLength='6'
           ref={newPasswordInputRef}
         />
       </div>
